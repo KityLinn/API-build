@@ -1,20 +1,26 @@
 import "./loadEnvironment.mjs";
-app.use("/posts", posts);
+import cors from "cors";
+import db from "./db/conn.mjs"
+import posts from "./routes/posts.mjs"
+import express from "express"
 
 // Loads the configuration from config.env to process.env
-require("dotenv").config({ path: "./config.env" });
+import dotenv from 'dotenv';
+dotenv.config({path: "./config.env" });
 
-const express = require("express");
-const cors = require("cors");
+
+
 // get MongoDB driver connection
-const dbo = require("./db/conn");
+
 
 const PORT = process.env.PORT || 4000;
 const app = express();
 
+app.use("/posts", posts);
+
 app.use(cors());
 app.use(express.json());
-app.use(require("./routes/posts"));
+
 
 // Global error handling
 app.use(function (err, _req, res) {
@@ -23,7 +29,7 @@ app.use(function (err, _req, res) {
 });
 
 // perform a database connection when the server starts
-dbo.connectToServer(function (err) {
+db.connectToServer(function (err) {
   if (err) {
     console.error(err);
     process.exit();

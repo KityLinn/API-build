@@ -1,12 +1,13 @@
-const express = require("express");
+import express from "express"
 
+import db from "../db/conn.mjs"
 // recordRoutes is an instance of the express router.
 // We use it to define our routes.
 // The router will be added as a middleware and will take control of requests starting with path /listings.
-const recordRoutes = express.Router();
+const router = express.Router();
 
 // This will help us connect to the database
-const dbo = require("../db/conn");
+
 
 // Get a list of 50 posts
 router.get("/", async (req, res) => {
@@ -54,4 +55,5 @@ router.delete("/:id", async (req, res) => {
   res.send(result).status(200);
 });
 
-module.exports = recordRoutes;
+export default router;
+
