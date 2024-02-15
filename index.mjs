@@ -17,7 +17,7 @@ const app = express();
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-app.use("/posts", posts);
+app.use("/data", posts);
 
 app.use(cors());
 app.use(express.json());
