@@ -50,9 +50,21 @@ router.patch("/comment/:id", async (req, res) => {
   res.send(result).status(200);
 });
 
+// update a single post
+router.put("/:id", async (req, res) => {
+  console.log(req.body);
+  const query = {_id: new ObjectId(req.params.id)};
+  const updates = {
+    $set:  req.body
+  };
+  let collection = await db.collection("Data");
+  let result = await collection.updateOne(query, updates);
+  res.send(result).status(200);
+});
+
 // Delete an entry
 router.delete("/:id", async (req, res) => {
-  const query = { _id: ObjectId(req.params.id) };
+  const query = { _id: new ObjectId(req.params.id) };
   const collection = db.collection("Data");
   let result = await collection.deleteOne(query);
   res.send(result).status(200);
