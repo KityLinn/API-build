@@ -7,7 +7,7 @@ router.use(express.json());
 
 
 // Get a list of 50 posts
-router.get("/blog", async (req, res) => {
+router.get("/", async (req, res) => {
   let collection = await db.collection("blog");
   let results = await collection.find({})
     .limit(50)
@@ -16,7 +16,7 @@ router.get("/blog", async (req, res) => {
 });
 
 // Get a single post
-router.get("/blog/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   let collection = await db.collection("blog");
   let query = {_id: new ObjectId(req.params.id)};
   let result = await collection.findOne(query);
@@ -25,7 +25,7 @@ router.get("/blog/:id", async (req, res) => {
 });
 
 // Add a new document to the collection
-router.post("/blog", async (req, res) => {
+router.post("/", async (req, res) => {
   let collection = await db.collection("blog");
     const title = req.body.title
     const body = req.body.body
@@ -47,7 +47,7 @@ router.post("/blog", async (req, res) => {
 });
 
 // Update the post with a new comment
-router.patch("/blog/comment/:id", async (req, res) => {
+router.patch("/comment/:id", async (req, res) => {
   const query = {_id: new ObjectId(req.params.id)};
   const updates = {
     $push: { comments: req.body }
@@ -58,7 +58,7 @@ router.patch("/blog/comment/:id", async (req, res) => {
 });
 
 // update a single post
-router.put("/blog/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   let collection = await db.collection("blog");
   const title = req.body.title
   const body = req.body.body
@@ -72,7 +72,7 @@ router.put("/blog/:id", async (req, res) => {
 });
 
 // Delete an entry
-router.delete("/blog/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   const query = { _id: new ObjectId(req.params.id) };
   const collection = db.collection("blog");
   let result = await collection.deleteOne(query);
