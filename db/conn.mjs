@@ -10,6 +10,6 @@ try {
 } catch(e) {
   console.error(e);
 }
-let db = conn.db("Test_base");
+let db = conn.db("ca_base");
 export default db;
 
