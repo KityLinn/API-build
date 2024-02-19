@@ -1,6 +1,7 @@
 import "./loadEnvironment.mjs";
 import cors from "cors";
-import posts from "./routes/posts.mjs"
+import blog from "./routes/blog.mjs"
+import pokemon from "./routes/pokemon.mjs"
 import express from "express"
 
 // Loads the configuration from config.env to process.env
@@ -17,7 +18,8 @@ const app = express();
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-app.use("/posts", posts);
+app.use("/blog", blog);
+app.use("/pokemon", pokemon);
 
 app.use(cors());
 app.use(express.json());
