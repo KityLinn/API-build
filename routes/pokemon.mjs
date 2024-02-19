@@ -52,12 +52,12 @@ router.post("/", async (req, res) => {
 // update a single post
 router.put("/:id", async (req, res) => {
   let collection = await db.collection("pokemon");
-  const title = req.body.title
-  const body = req.body.body
-  const tag = req.body.tag
+  const name = req.body.name
+  const type = req.body.type
+  const owned = req.body.owned
   const query = {_id: new ObjectId(req.params.id)};
   const updates = {
-    $set:  {title, body, tag}
+    $set:  {name, type, owned}
   };
   let result = await collection.updateOne(query, updates);
   res.send(result).status(200);
